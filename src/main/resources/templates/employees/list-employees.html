@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+ 
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head th:replace="layouts :: _header"></head>
+
+<body>
+	<!-- details defined in layouts.html with th:fragment="_navbar" -->
+	<nav th:replace="layouts :: _navbar"></nav>
+	<div class="container">
+	 	<h3>Employee Directory</h3>
+			<hr>
+			
+			<!--  Add New Employee Button -->
+			<!-- url not actual html page, mapping in controller -->
+			<a th:href="@{/employees/new}" 
+				class="btn btn-primary btn-sm mb-3"> 
+				Add Employee 
+			</a> 
+			<br></br>
+			
+		 	<table class="table table-bordered table-striped">
+			 	<thead class="thead-dark">
+			 		<tr>
+			 			<th>First Name</th>
+			 			<th>Last Name</th>
+			 			<th>Email</th>
+			 		</tr>
+			 	</thead>
+			 	<tbody>
+			 		<!-- th:each-> iterating variable - auto iterate list, need to define java obj -->
+			 		<!-- html var : java var(mapped via Model in controller) -->
+			 		<tr th:each ="aEmployee : ${employeesList}">  <!-- aEmployee is local html var -->
+			 			<td th:text="${aEmployee.firstname}"/>
+			 			<td th:text="${aEmployee.lastname}"/>
+			 			<td th:text="${aEmployee.email}"/>
+			 		</tr>
+			 	</tbody>
+		 	</table>
+	</div>
+
+</body>
+ 
+</html>

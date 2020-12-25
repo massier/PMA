@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+ 
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head th:replace="layouts :: _header"></head>
+
+<body>
+ 	<!-- details defined in layouts.html with th:fragment="_navbar" -->
+	<nav th:replace="layouts :: _navbar"></nav>
+	
+	<div class="container">
+		<!-- at submit/POST, bind th:obj to java Project obj by Model in proj controller -->
+		<form action="/projects/save" th:object="${project}" method="POST"> 
+		
+		<input type="text" placeholder="Project Name" th:field="${project.name}">
+		
+		<select th:field="${project.stage}">
+			<option th:value="NOTSTARTED"> Not Started</option>
+			<option th:value="INPROGRESS"> In Progress</option>
+			<option th:value="COMPLETED"> Completed</option>
+		</select>
+		
+		<textarea placeholder="Enter Project Description" th:field="${project.description}"></textarea>
+		
+		<!-- *{employees} == ${project.employees}  -->
+		<!-- Name must match proj Entity definition -->
+		<!-- Hibernate understands many-many from form below, no need to submit foreign key manually -->
+		<select th:field="*{employees}" multiple="multiple" >
+			<option th:each = "employee : ${employeesList}" 
+					th:value = "${employee.employeeId}"
+					th:text = "${employee.firstname}">
+			</option>
+		</select>
+		
+		<button type="submit">Create Project</button>
+		
+		</form>
+	</div>
+	
+</body>
+ 
+</html>

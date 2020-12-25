@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--  README: 
+ - To add any fragment, Google bootstrap + type (i.e. navbar)
+ - COpy code to below, add th:fragment="_name" INSIDE main type tag
+ - Use elsewhere by th:replace="layouts :: _name" INSIDE the same tag 
+ - Update button links: (1) ADD th: before href (2) Add relative path: th:href="@{/}"
+ -->
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head th:fragment="_header">
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 	<!-- Local custom CSS, relative path based on static/ -->
+ 	<!-- <link rel="stylesheet" th:href="@{/css/formatting.css}"> -->
+ 	
+ 	<!-- Import common chart libs -->
+ 	<!-- Add common lib JS in header, custom logic at the end (exe order & perf.) -->
+ 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+ 	
+	<!-- <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=l6SIq-pPt13cG2rJQTptXiJZKJ1Z1GvKQuJVcDzYMDtwrI82ycPcDFQFntj2zcx1HEolcu5BqRrqsj-fjRE_bti4vGCFoV_fCrwePUFpRnEOyV-OCl7W5IYChdMWlA8f_LVsFQmNchkoFi3Omi0VsVDJfGhOhn84sc9l9OflhjXYBdFQ_N2_I8O-iR5t0qC6zSG8tJ9wYf0-qZl6H0r0EbgR6ZxTrQ25xnLPV-ZvZyXzCuE1iEhL0dIjdP2t45Pk" charset="UTF-8"></script> -->
+</head>
+	
+<!-- th:fragment="_navbar" enables it to be called by name via th:replace-->
+<nav th:fragment="_navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">  <!-- navbar-light bg-light -->
+  <a class="navbar-brand" href="#">Project IO</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/employees}">Employees</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/projects}">Projects</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
