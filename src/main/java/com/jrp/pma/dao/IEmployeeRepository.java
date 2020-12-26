@@ -15,10 +15,10 @@ public interface IEmployeeRepository extends CrudRepository<Employee, Long> {
 	public List<Employee> findAll();
 	
 //	Copying from SQL: replace all /n with space, '+' are okay
-	@Query(nativeQuery=true, value="SELECT e.firstname as firstname, e.lastname as lastname, COUNT(pe.project_id) as projectCount "
+	@Query(nativeQuery=true, value="SELECT e.firstname as firstName, e.lastname as lastName, COUNT(pe.project_id) as projectCount "
 			+ "FROM employee e left join project_employee pe ON pe.employee_id = e.employee_id "
 			+ "GROUP BY e.firstname, e.lastname ORDER by 3 DESC")
 	public List<EmployeeProject> employeeProjects();
-//		returns a data transfer object (DTO), create an interface to capture that -> dto/EmployeeProject
+// returns a data transfer object (DTO), create an interface to capture that -> dto/EmployeeProject
 
 }

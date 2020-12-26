@@ -5,6 +5,6 @@ public interface EmployeeProject {
 	//get* need to match exactly as SQL, defined in IEmployeeRepository
 	public String getFirstName();
 	public String getLastName();
-	public String getProjectCount();
+	public int getProjectCount();
 
 }

@@ -36,11 +36,10 @@
 		
 			<div class="col-md-4">
 				<canvas id="myChart" height="50" width="50"></canvas>
-				
-<!-- 				<script>
+				<!-- getting data via Controller/model from DB (via crud interface) and pass to JS, syntax for JS data access -->
+				<script>
 					var chartData = "[[${projectStatusCnt}]]"
-				</script> -->
-				
+				</script>
 			</div>
 			
 		</div>
@@ -63,9 +62,9 @@
 			 		<!-- html var : java var(mapped via Model in controller) -->
 			 		<tr th:each ="aEmployee : ${employeesList}"> 
 			 		<!-- if below's from DB: field names must match DB cols OR (if query) IEmployeeRepository/EmployeeProject/get* -->
-			 			<td th:text="${aEmployee.firstname}"/>
-			 			<td th:text="${aEmployee.lastname}"/>
-			 			<td th:text="${aEmployee.email}"/>
+			 			<td th:text="${aEmployee.firstName}"/>
+			 			<td th:text="${aEmployee.lastName}"/>
+			 			<td th:text="${aEmployee.projectCount}"/>
 			 		</tr>
 			 	</tbody>
 		 	</table>
