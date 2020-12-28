@@ -5,6 +5,7 @@ import java.util.List;
 //import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,16 @@ import com.jrp.pma.entities.Project;
 
 @Controller
 public class HomeController {
+	//Autowired: auto dependency (field, constructor, setter) injection to Controller w/ existing bean instance (i.e. CRUD repo) from Spring context
+	//Need to define instances (i.e. IProjectRepository & its primary keys) and EXTENDS CrudRepository, 
+	//Or (if custom Class/Interface), add @Bean def. in app main OR ManufactureConfig class
+	//Equiv. to: IProjectRepository proRep = new IProjectRepository(); AND implement ALL crud methods (add, del, getBy*)
 	
-	@Autowired //auto dependency injection w/ primary key 
+	@Value("${version}") //user-defined in application.properties
+	private String ver;
+	
+	//Field injections
+	@Autowired
 	IProjectRepository proRep;
 	
 	@Autowired
@@ -30,10 +39,9 @@ public class HomeController {
 	@GetMapping("/")
 	public String displayHome(Model model) throws JsonProcessingException {
 		
-//		Map<String, Object> map = new HashMap<>();
+		model.addAttribute("versionNumber", ver);
 		
-//		Want list of projects, findAll() return Iterable type. 
-//		Overridden in IProjectRepository interface to return List
+//		Want list of projects, findAll() return Iterable type. Overridden in IProjectRepository interface to return List
 		List<Project> projects = proRep.findAll(); //Query via CRUD repo
 		model.addAttribute("projectsList", projects); //pass to view in home.html
 		

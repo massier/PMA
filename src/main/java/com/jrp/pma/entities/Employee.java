@@ -11,12 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Employee {
-	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO) //auto sequencing, only works if thru java, not working for sql seeding
-	@GeneratedValue(strategy=GenerationType.IDENTITY) //H rely on DB sequencing, thus works for both java & sql. Slow for batch
+	@Id  //primary key of each entity
+	//AUTO: only works if fed via java, not working for sql seeding; IDENTITY rely on DB sequencing, thus works for both java & sql, albeit slow for batch
+	//SEQUENCE faster for batch in Hibernate
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="employee_seq") //employee_seq defined in schema
+	@SequenceGenerator(name="employee_seq",sequenceName="employee_seq", allocationSize = 1) //needed if using sequence
 	private long employeeId;
 	
 	private String firstname;

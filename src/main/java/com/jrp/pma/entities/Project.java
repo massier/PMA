@@ -12,13 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity //Entity: for Hibernate to pick up and creates entity table  via jpa; can also show sql in app.properties
 public class Project {
 	
 	@Id //primary key of each entity
-//	@GeneratedValue(strategy=GenerationType.AUTO) //auto sequencing, only works if thru java, not working for sql seeding
-	@GeneratedValue(strategy=GenerationType.IDENTITY) //H rely on DB sequencing, thus works for both java & sql. Slow for batch
+	//AUTO: only works if fed via java, not working for sql seeding; IDENTITY rely on DB sequencing, thus works for both java & sql, albeit slow for batch
+	//SEQUENCE faster for batch in Hibernate
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="project_seq") //employee_seq defined in schema
+	@SequenceGenerator(name="project_seq",sequenceName="project_seq", allocationSize = 1) //needed if using sequence
 	private long projectId; //unique identifier
 	private String name;
 	private String stage; //i.e. NEW, INPROGRESS, COMPLETED

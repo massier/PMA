@@ -18,7 +18,7 @@ import com.jrp.pma.entities.Project;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-	@Autowired //allows Spring to auto inject empty instance to CRUD repo
+	@Autowired //field injections activated by @Controller
 	IProjectRepository proRep; //INTERFACE
 	@Autowired
 	IEmployeeRepository empRep;
